@@ -9,6 +9,7 @@ class User < ApplicationRecord
   # == Extensions ===========================================================
 
   # == Relationships ========================================================
+  has_many :projects, dependent: :destroy
 
   # == Validations ==========================================================
   validates :name, :document, presence: true

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Api::V1::UsersController do
+describe Api::V1::UsersController do
   describe 'POST #create' do
     subject(:http_request) { post :create, params: params }
 
@@ -84,7 +84,7 @@ RSpec.describe Api::V1::UsersController do
   end
 
   describe 'PUTS #update' do
-    subject(:http_request) { get :update, params: { id: id, user: params_name } }
+    subject(:http_request) { patch :update, params: { id: id, user: params_name } }
 
     let!(:user) { create_list(:user, 3) }
     let(:id) { User.last.id }
