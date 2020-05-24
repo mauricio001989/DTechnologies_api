@@ -9,6 +9,7 @@ class Project < ApplicationRecord
 
   # == Relationships ========================================================
   belongs_to :user
+  has_many :tasks, dependent: :destroy
 
   # == Validations ==========================================================
   validates :name, :user, presence: true
