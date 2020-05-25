@@ -38,7 +38,8 @@ module Api
       end
 
       def project
-        @project ||= current_user.projects.find(params.require(:project_id))
+        # TODO: expecteding policy for projects filter
+        @project ||= Project.find(params.require(:project_id))
       end
 
       def task_params

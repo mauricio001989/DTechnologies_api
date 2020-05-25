@@ -15,8 +15,4 @@ class ApiController < ApplicationController
   def render_error(error, status)
     render json: { errors: [error] }, status: status
   end
-
-  def current_user
-    User.find(request.headers['X-current-user']) if request.headers['X-current-user'].present?
-  end
 end

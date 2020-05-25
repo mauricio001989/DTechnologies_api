@@ -3,12 +3,11 @@ require 'rails_helper'
 describe Api::V1::TasksController do
   describe 'POST #create' do
     subject(:http_request) { post :create, params: { project_id: project.id, task: task } }
-    include_context 'wiht current user'
-    let(:project) { create(:project, :with_task, user: current_user) }
+    let(:project) {create(:project, :with_task)}
     let(:task) do
       {
-        deadline: '23-06-2020',
-        description: 'hola 444'
+        deadline: "23-06-2020",
+        description: "hola 444"
       }
     end
     context 'when project and task is correct' do
@@ -18,21 +17,21 @@ describe Api::V1::TasksController do
       end
 
       it 'validate in database' do
-        expect(project.tasks.count).to be 2
+          expect(project.tasks.count).to be 2
       end
     end
   end
 
   describe 'GET #index' do
     subject(:http_request) { get :index, params: { project_id: project.id } }
-    include_context 'wiht current user'
-
-    let(:project) { create(:project, :with_task, user: current_user) }
-    let!(:task) { create_list(:task, 3, project: project) }
+    let(:project) { create(:project, :with_task) }
+    let!(:task) {create_list(:task, 3, project: project)}
+    
 
     context 'validate state code' do
       before do
-        http_request
+       task
+       http_request
       end
 
       it 'white responds ok' do
@@ -40,20 +39,20 @@ describe Api::V1::TasksController do
       end
 
       it 'when valid the total project tasks' do
-        expect(JSON(response.body)["id: = #{project.id}, name: #{project.name}"].count).to be 4
+       expect(JSON(response.body)["id: = #{project.id}, name: #{project.name}"].count).to be 4
       end
     end
   end
 
   describe 'GET #show' do
-    subject(:http_request) { get :show, params: { project_id: project.id, id: task.last.id } }
-    include_context 'wiht current user'
-    let(:project) { create(:project, :with_task, user: current_user) }
-    let!(:task) { create_list(:task, 3, project: project) }
+  subject(:http_request) { get :show, params: { project_id: project.id, id: task.last.id } }
+    let(:project) { create(:project, :with_task) }
+    let!(:task) {create_list(:task, 3, project: project)}
+    
 
     context 'validate state code' do
       before do
-        http_request
+       http_request
       end
 
       it 'white responds ok' do
@@ -61,11 +60,11 @@ describe Api::V1::TasksController do
       end
 
       it 'when valid the tasks id' do
-        expect(JSON(response.body)['id']).to be(task.last.id)
+       expect(JSON(response.body)['id']).to be(task.last.id)
       end
     end
   end
 
-  # describe 'PUTS #update' do
-  # end
+  describe 'PUTS #update' do
+  end
 end

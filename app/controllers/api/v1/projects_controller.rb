@@ -3,8 +3,8 @@ module Api
     class ProjectsController < ApiController
       # GET /api/v1/projects
       def index
-        render json: { 'Projects':
-         ActiveModelSerializers::SerializableResource.new(current_user.projects) }
+        # TODO: expecteding policy for projects filter
+        render json: { 'Projects': ActiveModelSerializers::SerializableResource.new(Project.all) }
       end
 
       # GET /api/v1/projects/1
@@ -16,7 +16,7 @@ module Api
       def create
         project = Project.new(project_params)
 
-        return render json: project, status: :created if current_user.projects << project
+        return render json: project, status: :created if project.save
 
         render json: project.errors, status: :unprocessable_entity
       end
@@ -34,7 +34,7 @@ module Api
       private
 
       def project
-        @project ||= current_user.projects.find(params[:id])
+        @project ||= Project.find(params[:id])
       end
 
       def project_params
