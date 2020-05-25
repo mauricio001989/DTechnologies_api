@@ -17,10 +17,6 @@ Documentation:
 LineLength:
   Max: 99
 
-Metrics/BlockLength:
-  Exclude:
-    - spec/**/*
-
 HasAndBelongsToMany:
   Enabled: false
 
