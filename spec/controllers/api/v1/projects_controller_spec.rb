@@ -3,8 +3,8 @@ require 'rails_helper'
 describe Api::V1::ProjectsController do
   describe 'POST #create' do
     subject(:http_request) { post :create, params: params }
+    include_context 'wiht current user'
 
-    let(:user) { create(:user) }
     let(:params) do
       {
         project: {
@@ -15,7 +15,6 @@ describe Api::V1::ProjectsController do
 
     context 'when project is correct' do
       before do
-        params[:project].update(user_id: user.id)
         http_request
       end
 
@@ -24,12 +23,15 @@ describe Api::V1::ProjectsController do
       end
 
       it 'validate in database' do
-        expect(Project.last.name).to eq('project 1')
+        expect(current_user.projects.last.name).to eq('project 1')
       end
     end
 
     context 'when project is not correct' do
-      before { http_request }
+      before do
+        params[:project].update(name: '')
+        http_request
+      end
 
       it 'responds with created unprocessable entity' do
         expect(response).to have_http_status(:unprocessable_entity)
@@ -41,8 +43,8 @@ describe Api::V1::ProjectsController do
     subject(:http_request) { get :index }
 
     context 'when get all projects' do
-      # TODO: expecteding policy for projects filter
-      let!(:projects) { create_list(:user, 3, :with_project) }
+      include_context 'wiht current user'
+      let!(:projects) { create_list(:project, 3, user: current_user) }
 
       before do
         http_request
@@ -62,11 +64,12 @@ describe Api::V1::ProjectsController do
 
   describe 'GET #show' do
     subject(:http_request) { get :show, params: params }
+    include_context 'wiht current user'
 
     let(:params) { { id: projects.last.id } }
 
     context 'when valid a user' do
-      let(:projects) { create_list(:project, 3) }
+      let(:projects) { create_list(:project, 3, user: current_user) }
 
       before { http_request }
 
@@ -84,8 +87,9 @@ describe Api::V1::ProjectsController do
 
   describe 'PUTS #update' do
     subject(:http_request) { patch :update, params: { id: id, project: params_name } }
+    include_context 'wiht current user'
 
-    let!(:project) { create_list(:project, 3) }
+    let!(:project) { create_list(:project, 3, user: current_user) }
     let(:id) { Project.last.id }
 
     context 'when valid a project' do
