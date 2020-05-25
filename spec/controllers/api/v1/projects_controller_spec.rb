@@ -41,7 +41,7 @@ describe Api::V1::ProjectsController do
     subject(:http_request) { get :index }
 
     context 'when get all projects' do
-      #TODO: expecteding policy for projects filter
+      # TODO: expecteding policy for projects filter
       let!(:projects) { create_list(:user, 3, :with_project) }
 
       before do
