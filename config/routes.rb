@@ -4,5 +4,6 @@ Rails.application.routes.draw do
     resources :projects do
       resources :tasks
     end
+    resources :binarys, only: %i[show]
   end
 end
