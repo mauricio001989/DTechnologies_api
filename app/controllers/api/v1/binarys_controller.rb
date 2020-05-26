@@ -3,7 +3,7 @@ module Api
     class BinarysController < ApiController
       # GET /api/v1/binarys/N
       def show
-        return render json: json
+        render json: json
       end
 
       private
@@ -13,7 +13,7 @@ module Api
           integer: param,
           binary: binary,
           more_long: more_long,
-          split_for_0: split_for_0
+          split_for_0: split_for
         }
       end
 
@@ -25,13 +25,13 @@ module Api
         @binary ||= (param.to_i).to_s(2)
       end
 
-      def split_for_0
-        @split_for_0 ||= binary.split('1')
+      def split_for
+        @split_for ||= binary.split('1')
       end
 
       def more_long
         long = 0
-        split_for_0.each { |array| long = array.length if array.length > long }
+        split_for.each { |array| long = array.length if array.length > long }
         long
       end
     end

@@ -18,14 +18,14 @@ module Api
 
         return render json: project, status: :created if current_user.projects << project
 
-        render json: project.errors, status: :unprocessable_entity
+        render_error(project)
       end
 
       # PATCH/PUT /api/v1/projects/1
       def update
         return render json: project if project.update(project_params)
 
-        render json: project.errors, status: :unprocessable_entity
+        render_error(project)
       end
 
       # DELETE /api/v1/projects/1
@@ -34,7 +34,7 @@ module Api
       private
 
       def project
-        @project ||= current_user.projects.find(params[:id])
+        @project ||= current_user.projects.find(params_id)
       end
 
       def project_params
