@@ -18,8 +18,7 @@ Response
 ```
 
 
-# request postmand
-
+# postmand request in link
 https://drive.google.com/drive/folders/1TLCPebAE_-8tirVV_IWLVfq7TdSLBJhK?usp=sharing
 
 # User
@@ -52,6 +51,4 @@ https://drive.google.com/drive/folders/1TLCPebAE_-8tirVV_IWLVfq7TdSLBJhK?usp=sha
 
 # binary
 
-*show
-
-* drop
+* show
