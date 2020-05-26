@@ -19,6 +19,8 @@ class Task < ApplicationRecord
 
   # == Relationships ========================================================
   belongs_to :project
+  has_many :comments, dependent: :destroy
+  delegate :user, to: :project, allow_nil: true
 
   # == Validations ==========================================================
   validates :deadline, :description, :project, presence: true
