@@ -9,5 +9,6 @@ describe User do
     it { is_expected.to validate_presence_of(:document) }
 
     it { is_expected.to have_many(:projects) }
+    it { is_expected.to have_many(:tasks) }
   end
 end

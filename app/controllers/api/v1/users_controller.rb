@@ -16,14 +16,14 @@ module Api
         user = User.new(user_params)
         return render json: user, status: :created if user.save
 
-        render json: user.errors, status: :unprocessable_entity
+        render_error(user)
       end
 
       # PATCH/PUT /api/v1/users/:id
       def update
         return render json: user if user.update(user_params)
 
-        render json: user.errors, status: :unprocessable_entity
+        render_error(user)
       end
 
       # DELETE /api/v1/users/:id
@@ -32,7 +32,7 @@ module Api
       private
 
       def user
-        @user ||= User.find(params[:id])
+        @user ||= User.find(params_id)
       end
 
       def user_params

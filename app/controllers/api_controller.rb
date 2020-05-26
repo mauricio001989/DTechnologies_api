@@ -1,4 +1,5 @@
 class ApiController < ApplicationController
+  include ParamsId
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
   rescue_from ArgumentError, with: :unprocessable_entity
 
@@ -12,8 +13,8 @@ class ApiController < ApplicationController
     render_error(error, :not_found)
   end
 
-  def render_error(error, status)
-    render json: { errors: [error] }, status: status
+  def render_error(object)
+    render json: object.errors, status: :unprocessable_entity
   end
 
   def current_user

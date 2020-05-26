@@ -18,14 +18,14 @@ module Api
 
         return render json: task, status: :created if project.tasks << task
 
-        render json: task.errors, status: :unprocessable_entity
+        render_error(task)
       end
 
       # PATCH/PUT /api/v1/project/:id_project/tasks/1
       def update
-        return render json: task  if task.update(task_params)
+        return render json: task if task.update(task_params)
 
-        render json: task.errors, status: :unprocessable_entity
+        render_error(task)
       end
 
       # DELETE /api/v1/project/:id_project/tasks/1
@@ -38,7 +38,7 @@ module Api
       end
 
       def project
-        @project ||= current_user.projects.find(params.require(:project_id))
+        @project ||= current_user.projects.find(project_id)
       end
 
       def task_params

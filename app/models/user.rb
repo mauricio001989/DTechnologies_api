@@ -10,6 +10,7 @@ class User < ApplicationRecord
 
   # == Relationships ========================================================
   has_many :projects, dependent: :destroy
+  has_many :tasks, through: :projects, dependent: :destroy
 
   # == Validations ==========================================================
   validates :name, :document, presence: true

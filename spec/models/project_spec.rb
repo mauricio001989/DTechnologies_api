@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe Project do
-  context 'when create a user' do
+  context 'when create a project' do
     subject(:project) { build_stubbed(:project) }
 
     it { is_expected.to validate_presence_of(:name) }

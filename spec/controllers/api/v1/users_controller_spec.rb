@@ -43,7 +43,7 @@ describe Api::V1::UsersController do
     subject(:http_request) { get :index }
 
     context 'when get all users' do
-      let!(:user) { create_list(:user, 3) }
+      let!(:user) { create_list(:user, 3, :with_project) }
 
       before do
         http_request
