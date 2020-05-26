@@ -8,5 +8,10 @@ project_2 = Project.create(name:'Project 2',user: user_2)
 Project.create(name:'Project 3',user: user_1)
 
 puts 'create tast'
-Task.create(deadline: Time.zone.today + 5, project: project_1, description:"descripción de la actividad 1")
-Task.create(deadline: Time.zone.today + 5, project: project_2, description:"descripción de la actividad 2")
+tast_1 = Task.create(deadline: Time.zone.today + 5, project: project_1, description:"descripción de la actividad 1")
+tast_2 = Task.create(deadline: Time.zone.today + 5, project: project_2, description:"descripción de la actividad 2")
+
+puts 'create comments'
+Comment.create(comment: 'comment 1', task: tast_1)
+Comment.create(comment: 'comment 2', task: tast_2)
+Comment.create(comment: 'comment 2', task: tast_2)
