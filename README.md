@@ -16,3 +16,42 @@ Response
     ]
 }
 ```
+
+
+# request postmand
+
+https://drive.google.com/drive/folders/1TLCPebAE_-8tirVV_IWLVfq7TdSLBJhK?usp=sharing
+
+# User
+
+* create
+* update
+* show
+* drop
+
+# Project
+
+* create
+* update
+* show
+* drop
+
+# Task
+
+* create
+* update
+* show
+* drop
+
+# Comment
+
+* create
+* update
+* show
+* drop
+
+# binary
+
+*show
+
+* drop
